@@ -1,0 +1,53 @@
+<div class="modal fade" id="taskPopup" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create task</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title*</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            maxlength="100"
+            [(ngModel)]="task.title"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label"> Description </label>
+          <textarea
+            class="form-control"
+            id="description_"
+            rows="3"
+            maxlength="1000"
+            [(ngModel)]="task.description"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onSaveTask()"
+          [disabled]="task.title.length === 0"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="mb-3">
+  <button type="button" class="btn btn-link" (click)="onAdd()">Add task</button>
+
+  <button type="button" class="btn btn-link" (click)="loadTasks()">
+    Refresh
+  </button>
+</div>
+
+<app-task-create-edit [task]="task" (onSave)="onSave($event)">
+</app-task-create-edit>
+
+<table class="table table-bordered table-hover table-responsive">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <td>{{ task.id }}</td>
+
+      <td>{{ task.title }}</td>
+
+      <td>
+        <div
+          class="form-check form-switch"
+          (click)="
+            onToggleStatus(
+              task.id,
+              task.status === TASK_STATUS.Doing
+                ? TASK_STATUS.Done
+                : TASK_STATUS.Doing
+            )
+          "
+        >
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="status_{{ task.id }}"
+            [checked]="task.status === TASK_STATUS.Done"
+          />
+          <label class="form-check-label" for="status_{{ task.id }}">
+            {{ task.status === TASK_STATUS.Doing ? "Doing" : "Done" }}
+          </label>
+        </div>
+      </td>
+
+      <td>
+        <input
+          type="button"
+          class="btn btn-primary pr-4"
+          value="Edit"
+          (click)="onEdit(task.id)"
+        />
+        &nbsp;
+        <input
+          type="button"
+          class="btn btn-danger"
+          value="Delete"
+          (click)="onDelete(task.id)"
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>
